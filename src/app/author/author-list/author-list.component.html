@@ -1,0 +1,63 @@
+<div *ngIf="!loading; else isLoading">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="author-item" *ngFor="let author of authors">
+        <th>{{ author.id }}</th>
+        <td>{{ author.firstName }}</td>
+        <td>{{ author.lastName }}</td>
+        <td>
+          <div class="author-action" appDropdown>
+            <a>
+              <i class="fa fa-ellipsis-v fa-2x text-muted"></i>
+            </a>
+            <div class="author-menu-action dropdown-menu app-dropdown pt-3 pb-2">
+              <a class="dropdown-item mb-2" href="#">
+                <i class="text-primary fa fa-edit"></i> Edit Recipe
+              </a>
+              <a class="dropdown-item" href="#">
+                <i class="text-danger fa fa-trash"></i> Delete Recipe
+              </a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- pager -->
+  <ul *ngIf="pager.pages && pager.pages.length" class="pagination justify-content-center">
+    <li [ngClass]="{disabled:pager.currentPage === 1, 'page-item': true}">
+      <a class="page-link" (click)="setPage(1)">First</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === 1, 'page-item': true}">
+      <a class="page-link" (click)="setPage(pager.currentPage - 1)">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page, 'page-item': true}">
+      <a class="page-link" (click)="setPage(page)">{{page}}</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages, 'page-item': true}">
+      <a class="page-link" (click)="setPage(pager.currentPage + 1)">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages, 'page-item': true}">
+      <a class="page-link" (click)="setPage(pager.totalPages)">Last</a>
+    </li>
+  </ul>
+</div>
+<ng-template #isLoading>
+  Loading <i class="fa fa-spinner"></i>
+</ng-template>

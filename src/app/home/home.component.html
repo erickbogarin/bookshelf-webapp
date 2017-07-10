@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-between align-items-center">
+  <h2 class="text-muted ml-2">
+    Authors
+  </h2>
+  <a class="btn btn-primary" routerLink="authors/create">
+    <i class="fa fa-plus"></i> New author
+  </a>
+</div>
+<hr>
+<div class="container mt-5">
+  <app-author-list [limit]="8" [config]="listConfig"></app-author-list>
+</div>
