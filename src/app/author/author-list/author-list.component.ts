@@ -16,7 +16,7 @@ import {
 })
 export class AuthorListComponent {
   authors: Author[];
-  authorsCount:number = 0;
+  authorsCount: number = 0;
   loading = false;
   query: AuthorListConfig;
   pager: any = {};
