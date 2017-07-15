@@ -25,7 +25,19 @@ export class AuthorsService {
     return this.apiService.get('/authors/count');
   }
 
+  save(author): Observable<Author> {
+    if (author.id) {
+      return this.apiService.put(`/authors/${author.id}`, author);
+    } else {
+      return this.apiService.post(`/authors`, author);
+    }
+  }
+
+  get(id): Observable<Author> {
+    return this.apiService.get(`/authors/${id}`);
+  }
+
   destroy(id) {
-    return this.apiService.delete(`/authors/%{id}`);
+    return this.apiService.delete(`/authors/${id}`);
   }
 }
