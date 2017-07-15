@@ -1,5 +1,5 @@
 <div *ngIf="!loading; else isLoading">
-  <table class="table">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>#</th>
@@ -19,7 +19,7 @@
               <i class="fa fa-ellipsis-v fa-2x text-muted"></i>
             </a>
             <div class="author-menu-action dropdown-menu app-dropdown pt-3 pb-2">
-              <a class="dropdown-item mb-2" href="#">
+              <a class="dropdown-item mb-2" [routerLink]="['/authors', author.id, 'update']">
                 <i class="text-primary fa fa-edit"></i> Edit Recipe
               </a>
               <a class="dropdown-item" href="#">
