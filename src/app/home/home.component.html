@@ -8,5 +8,11 @@
 </div>
 <hr>
 <div class="container mt-5">
-  <app-author-list [limit]="8" [config]="listConfig"></app-author-list>
+  <div class="input-group">
+    <span class="input-group-addon">
+      <i class="fa fa-search"></i>
+    </span>
+    <input class="form-control" placeholder="Search" type="text" [(ngModel)]="search">
+  </div>
+  <app-author-list [limit]="8" [search]="search" [config]="listConfig"></app-author-list>
 </div>

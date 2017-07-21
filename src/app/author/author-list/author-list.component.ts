@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, SimpleChange } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 
@@ -15,6 +15,16 @@ import {
   styleUrls: ['./author-list.component.sass']
 })
 export class AuthorListComponent {
+  @Input() search: string;
+  @Input() limit: number;
+  @Input()
+  set config(config: AuthorListConfig) {
+    if (config) {
+       this.query = config;
+       this.pager.currentPage = 1;
+    }
+  }
+
   authors: Author[];
   authorsCount: number = 0;
   loading = false;
@@ -26,26 +36,23 @@ export class AuthorListComponent {
     private paginationService: PaginationService
   ) { }
 
-  @Input() limit: number;
-  @Input()
-  set config(config: AuthorListConfig) {
-    if (config) {
-       this.query = config;
-       this.pager.currentPage = 1;
-       this.runFetch();
+  ngOnChanges(props: SimpleChange) {
+    if (props['search']) {
+      this.runFetch();
     }
   }
-
   runFetch() {
     this.loading = true;
     this.authors = [];
+
+    this.checkSearchInput();
 
     if (this.limit) {
       this.query.filters.limit = this.limit;
     }
 
     const authors = this.authorsService.fetchAuthors(this.query);
-    const authorsCount = this.authorsService.fetchAuthorsCount();
+    const authorsCount = this.authorsService.fetchAuthorsCount(this.query);
 
     Observable.forkJoin([authors, authorsCount])
       .subscribe(data => {
@@ -54,6 +61,28 @@ export class AuthorListComponent {
         this.loading = false;
         this.pager = this.paginationService.getPager(this.authorsCount, this.pager.currentPage, this.limit);
       });
+  }
+
+  checkSearchInput() {
+    if (this.search) {
+      this.query.filters.where = {
+        or: [
+          {
+            firstName: {
+              ilike: this.search
+            }
+          },
+          {
+            lastName: {
+              ilike: this.search
+            }
+          }
+        ]
+      }
+    }
+    else {
+      this.query.filters.where = {}
+    }
   }
 
   setPage(page: number) {

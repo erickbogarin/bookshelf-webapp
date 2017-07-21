@@ -3,6 +3,7 @@ export class AuthorListConfig {
   filters: {
     limit?: number,
     offset?: number,
-    order?: string
+    order?: string,
+    where?: Object
   } = {};
 }

@@ -21,8 +21,11 @@ export class AuthorsService {
     return this.apiService.get('/authors', params);
   }
 
-  fetchAuthorsCount(): Observable<{ count: number }> {
-    return this.apiService.get('/authors/count');
+  fetchAuthorsCount(config: AuthorListConfig): Observable<{ count: number }> {
+    const params: URLSearchParams = new URLSearchParams();
+    params.set('where', JSON.stringify(config.filters.where));
+
+    return this.apiService.get('/authors/count', params);
   }
 
   save(author): Observable<Author> {

@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
+  search: string = '';
   listConfig: AuthorListConfig = new AuthorListConfig();
 
   ngOnInit() {
