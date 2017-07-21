@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { DropdownDirective } from './directives/dropdown.directive';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { DropdownDirective } from './directives/dropdown.directive';
     RouterModule
   ],
   declarations: [
-    DropdownDirective
+    DropdownDirective,
+    PaginationComponent
   ],
   exports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { DropdownDirective } from './directives/dropdown.directive';
     ReactiveFormsModule,
     HttpModule,
     RouterModule,
-    DropdownDirective
+    DropdownDirective,
+    PaginationComponent
   ]
 })
 export class SharedModule {}
