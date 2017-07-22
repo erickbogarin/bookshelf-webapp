@@ -1,6 +1,14 @@
-<h1>Update Author</h1>
-<hr>
-<app-alert></app-alert>
-<app-author-form [author]="author" (onSubmited)="updateAuthor($event)">
-  <button type="submit" class="btn btn-success">Update</button>
-</app-author-form>
+<div class="bg-faded pt-5 pb-5">
+  <div class="container">
+    <h2 class="text-muted">
+      Update Author
+    </h2>
+  </div>
+</div>
+
+<div class="container mt-3">
+  <app-alert></app-alert>
+  <app-author-form [author]="author" (onSubmited)="updateAuthor($event)">
+    <button type="submit" class="btn btn-success">Update</button>
+  </app-author-form>
+</div>
