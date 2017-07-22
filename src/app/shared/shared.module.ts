@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { DropdownDirective } from './directives/dropdown.directive';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
   ],
   declarations: [
     DropdownDirective,
-    PaginationComponent
+    PaginationComponent,
+    AlertComponent
   ],
   exports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     HttpModule,
     RouterModule,
     DropdownDirective,
-    PaginationComponent
+    PaginationComponent,
+    AlertComponent
   ]
 })
 export class SharedModule {}

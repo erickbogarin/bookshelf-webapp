@@ -12,6 +12,7 @@ import {
   AuthorsService,
   SharedModule,
   PaginationService,
+  AlertService,
   HeaderComponent
 } from './shared';
 
@@ -20,7 +21,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([]);
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +34,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([]);
   providers: [
     ApiService,
     AuthorsService,
-    PaginationService
+    PaginationService,
+    AlertService
   ],
   bootstrap: [AppComponent]
 })
