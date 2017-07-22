@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Author, AuthorsService } from '../../../shared'
+import {
+  Author,
+  AuthorsService ,
+  AlertService
+} from '../../../shared'
 
 @Component({
   selector: 'app-author-update',
@@ -14,7 +18,8 @@ export class AuthorUpdateComponent implements OnInit {
   constructor(
     private authorService: AuthorsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -26,7 +31,10 @@ export class AuthorUpdateComponent implements OnInit {
   }
 
   updateAuthor(author: Author) {
-    this.authorService.save(author);
+    this.authorService.save(author)
+      .subscribe(data => {
+        this.alertService.success('Author successfully updated!');
+      });
   }
 
 }

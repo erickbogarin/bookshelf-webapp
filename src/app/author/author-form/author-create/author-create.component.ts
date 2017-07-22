@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Author, AuthorsService } from '../../../shared';
+import {
+  Author,
+  AuthorsService,
+  AlertService
+} from '../../../shared';
 
 @Component({
   selector: 'app-author-create',
@@ -10,14 +14,18 @@ import { Author, AuthorsService } from '../../../shared';
 export class AuthorCreateComponent implements OnInit {
 
   constructor(
-    private authorsService: AuthorsService
+    private authorsService: AuthorsService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
   }
 
   createAuthor(author: Author) {
-    this.authorsService.save(author);
+    this.authorsService.save(author)
+      .subscribe(data => {
+        this.alertService.success('Author successfully created!');
+      });
   }
 
 }
