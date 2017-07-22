@@ -64,7 +64,7 @@ export class AuthorListComponent {
   }
 
   checkSearchInput() {
-    if (this.search) {
+    if (this.search && this.search.length > 0) {
       this.query.filters.where = {
         or: [
           {
@@ -78,7 +78,9 @@ export class AuthorListComponent {
             }
           }
         ]
-      }
+      };
+      this.query.filters.offset = 0;
+      this.pager.currentPage = 1;
     }
     else {
       this.query.filters.where = {}
