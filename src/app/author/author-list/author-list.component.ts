@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChange } from '@angular/core';
+import { Component, Input, OnInit, SimpleChange, OnChanges, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 
@@ -6,7 +6,8 @@ import {
   Author,
   AuthorsService,
   AuthorListConfig,
-  PaginationService
+  PaginationService,
+  SortByService,
 } from '../../shared';
 
 @Component({
@@ -14,7 +15,7 @@ import {
   templateUrl: './author-list.component.html',
   styleUrls: ['./author-list.component.sass']
 })
-export class AuthorListComponent {
+export class AuthorListComponent implements OnInit, OnChanges {
   @Input() search: string;
   @Input() limit: number;
   @Input()
@@ -26,17 +27,26 @@ export class AuthorListComponent {
   }
 
   authors: Author[];
-  authorsCount: number = 0;
+  authorsCount = 0;
   loading = false;
   query: AuthorListConfig;
   pager: any = {};
 
   constructor(
     private authorsService: AuthorsService,
-    private paginationService: PaginationService
+    private paginationService: PaginationService,
+    private sortByService: SortByService
   ) { }
 
-  ngOnChanges(props: SimpleChange) {
+  ngOnInit() {
+    this.sortByService.getSortBy().subscribe(property => {
+      this.query.filters.order = property;
+      console.log(property);
+      // this.runFetch();
+    })
+  }
+
+  ngOnChanges(props) {
     if (props['search']) {
       this.runFetch();
     }
@@ -81,8 +91,7 @@ export class AuthorListComponent {
       };
       this.query.filters.offset = 0;
       this.pager.currentPage = 1;
-    }
-    else {
+    } else {
       this.query.filters.where = {}
     }
   }

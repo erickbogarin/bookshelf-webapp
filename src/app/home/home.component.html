@@ -13,10 +13,10 @@
 
 <div class="container mt-5">
   <div class="input-group">
+    <input class="form-control" placeholder="Search" type="text" [(ngModel)]="search">
     <span class="input-group-addon">
       <i class="fa fa-search"></i>
     </span>
-    <input class="form-control" placeholder="Search" type="text" [(ngModel)]="search">
   </div>
   <app-author-list [limit]="8" [search]="search" [config]="listConfig"></app-author-list>
 </div>
