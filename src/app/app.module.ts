@@ -13,6 +13,7 @@ import {
   SharedModule,
   PaginationService,
   AlertService,
+  SortByService,
   HeaderComponent
 } from './shared';
 
@@ -35,7 +36,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([]);
     ApiService,
     AuthorsService,
     PaginationService,
-    AlertService
+    AlertService,
+    SortByService
   ],
   bootstrap: [AppComponent]
 })

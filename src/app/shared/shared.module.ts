@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { SortByDirective } from './directives/sort-by.directive';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { AlertComponent } from './components/alert/alert.component';
   declarations: [
     DropdownDirective,
     PaginationComponent,
-    AlertComponent
+    AlertComponent,
+    SortByDirective
   ],
   exports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { AlertComponent } from './components/alert/alert.component';
     HttpModule,
     RouterModule,
     DropdownDirective,
+    SortByDirective,
     PaginationComponent,
     AlertComponent
   ]
