@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { ModalComponent } from './components/modal/modal.component';
 import { SortByDirective } from './directives/sort-by.directive';
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SortByDirective } from './directives/sort-by.directive';
     DropdownDirective,
     PaginationComponent,
     AlertComponent,
-    SortByDirective
+    SortByDirective,
+    ModalComponent
   ],
   exports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { SortByDirective } from './directives/sort-by.directive';
     DropdownDirective,
     SortByDirective,
     PaginationComponent,
-    AlertComponent
+    AlertComponent,
+    ModalComponent
   ]
 })
 export class SharedModule {}

@@ -14,6 +14,7 @@ import {
   PaginationService,
   AlertService,
   SortByService,
+  ModalService,
   HeaderComponent
 } from './shared';
 
@@ -37,7 +38,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([]);
     AuthorsService,
     PaginationService,
     AlertService,
-    SortByService
+    SortByService,
+    ModalService
   ],
   bootstrap: [AppComponent]
 })
