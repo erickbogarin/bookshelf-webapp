@@ -9,10 +9,7 @@ import { Author, AuthorListConfig } from '../../shared';
 
 @Injectable()
 export class AuthorsService {
-
-  constructor(
-    private apiService: ApiService
-  ) { }
+  constructor(private apiService: ApiService) {}
 
   fetchAuthors(config: AuthorListConfig): Observable<Author[]> {
     const params: URLSearchParams = new URLSearchParams();

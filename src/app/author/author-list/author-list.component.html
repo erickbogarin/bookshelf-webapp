@@ -1,7 +1,7 @@
 <div *ngIf="!loading; else isLoading">
 
   <!-- author table -->
-  <table class="table table-striped">
+  <table class="table table-hover">
     <thead>
       <tr #sort>
         <th>#</th>
@@ -28,11 +28,13 @@
               <i class="fa fa-ellipsis-v fa-2x text-muted"></i>
             </a>
             <div class="author-menu-action dropdown-menu app-dropdown pt-3 pb-2">
+              <!-- update author -->
               <a class="dropdown-item mb-2" [routerLink]="['/authors', author.id, 'update']">
-                <i class="text-primary fa fa-edit"></i> Edit Recipe
+                <i class="text-primary fa fa-edit"></i> Update Author
               </a>
-              <a class="dropdown-item" href="#">
-                <i class="text-danger fa fa-trash"></i> Delete Recipe
+              <!-- delete author -->
+              <a class="dropdown-item" href="#" (click)="openModal(authorModalDeleteId, author)">
+                <i class="text-danger fa fa-trash"></i> Delete Author
               </a>
             </div>
           </div>
@@ -50,3 +52,28 @@
 <ng-template #isLoading>
   Loading <i class="fa fa-spinner"></i>
 </ng-template>
+
+<!-- delete author modal -->
+<app-modal id="author-delete-modal" class="modal fade">
+  <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ 'Delete author' | uppercase }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal(authorModalDeleteId);">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p>Are you sure you want to delete this author?</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="deleteAuthor()">Delete</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal(authorModalDeleteId);">Cancel</button>
+      </div>
+    </div>
+    <!-- end .modal-content -->
+  </div>
+</app-modal>
