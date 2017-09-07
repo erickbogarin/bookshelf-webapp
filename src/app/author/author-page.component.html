@@ -1,0 +1,23 @@
+<div class="bg-light pt-5 pb-5">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2 class="text-muted">
+        Authors
+      </h2>
+      <a class="btn btn-outline-info" routerLink="/authors/create">
+          <i class="fa fa-plus-circle"></i> New author
+        </a>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <app-alert></app-alert>
+  <div class="input-group">
+    <input class="form-control" placeholder="Search" type="text" [(ngModel)]="search">
+    <span class="input-group-addon">
+        <i class="fa fa-search"></i>
+      </span>
+  </div>
+  <app-author-list [limit]="8" [search]="search" [config]="listConfig"></app-author-list>
+</div>
