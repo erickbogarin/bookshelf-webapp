@@ -4,7 +4,6 @@ A real-world Angular app that calls a remote API
 
 ## Feature List
 - CRUD authors 
-- CRUD books
 - Search
 - Pagination
 - Sorting
