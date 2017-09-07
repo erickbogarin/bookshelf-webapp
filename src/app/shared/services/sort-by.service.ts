@@ -6,7 +6,7 @@ import { Subject } from 'rxjs/Subject';
 export class SortByService {
   private subject = new Subject<string>();
 
-  constructor() { }
+  constructor() {}
 
   sortBy(property: string) {
     this.subject.next(property);
@@ -15,5 +15,4 @@ export class SortByService {
   getSortBy(): Observable<any> {
     return this.subject.asObservable();
   }
-
 }

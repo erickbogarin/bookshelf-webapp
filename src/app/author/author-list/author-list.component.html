@@ -1,60 +1,59 @@
-<div *ngIf="!loading; else isLoading">
-
-  <!-- author table -->
-  <table class="table table-hover">
-    <thead>
-      <tr #sort>
-        <th>#</th>
-        <th>
-          First Name
-          <i class="fa fa-sort" [appSortBy]="'firstName'"></i>
-        </th>
-        <th>
-          Last Name
-          <i class="fa fa-sort" [appSortBy]="'lastName'"></i>
-        </th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="author-item" *ngFor="let author of authors">
-        <td>{{ author.id }}</td>
-        <td>{{ author.firstName }}</td>
-        <td>{{ author.lastName }}</td>
-        <!-- author actions -->
-        <td>
-          <div class="author-action" appDropdown>
-            <a>
+<!-- author table -->
+<table class="table table-hover">
+  <thead>
+    <tr #sort>
+      <th>#</th>
+      <th>
+        First Name
+        <i class="fa fa-sort" [appSortBy]="'firstName'"></i>
+      </th>
+      <th>
+        Last Name
+        <i class="fa fa-sort" [appSortBy]="'lastName'"></i>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="author-item" *ngFor="let author of authors">
+      <td>{{ author.id }}</td>
+      <td>{{ author.firstName }}</td>
+      <td>{{ author.lastName }}</td>
+      <!-- author actions -->
+      <td>
+        <div class="author-action" appDropdown>
+          <a>
               <i class="fa fa-ellipsis-v fa-2x text-muted"></i>
             </a>
-            <div class="author-menu-action dropdown-menu app-dropdown pt-3 pb-2">
-              <!-- update author -->
-              <a class="dropdown-item mb-2" [routerLink]="['/authors', author.id, 'update']">
+          <div class="author-menu-action dropdown-menu app-dropdown pt-3 pb-2">
+            <!-- update author -->
+            <a class="dropdown-item mb-2" [routerLink]="['/authors', author.id, 'update']">
                 <i class="text-primary fa fa-edit"></i> Update Author
               </a>
-              <!-- delete author -->
-              <a class="dropdown-item" href="#" (click)="openModal(authorModalDeleteId, author)">
+            <!-- delete author -->
+            <a class="dropdown-item" href="#" (click)="openModal(authorModalDeleteId, author)">
                 <i class="text-danger fa fa-trash"></i> Delete Author
               </a>
-            </div>
           </div>
-        </td>
-        <!-- end actions -->
-      </tr>
-    </tbody>
-  </table>
-  <!-- end table -->
+        </div>
+      </td>
+      <!-- end actions -->
+    </tr>
+  </tbody>
+</table>
+<!-- end table -->
 
-  <app-pagination [pager]="pager" (onSetPage)="setPage($event)"></app-pagination>
-</div>
+<app-pagination [pager]="pager" (onSetPage)="setPage($event)"></app-pagination>
 
 <!-- spinner while loads the authors  -->
-<ng-template #isLoading>
-  Loading <i class="fa fa-spinner"></i>
-</ng-template>
+<div *ngIf="loading">
+  <div class="mt-3">
+    Loading <i class="fa fa-spinner fa-spin fa-fw"></i>
+  </div>
+</div>
 
 <!-- delete author modal -->
-<app-modal id="author-delete-modal" class="modal fade">
+<app-modal id="{{ authorModalDeleteId }}" class="modal fade">
   <div class="modal-dialog" role="document">
 
     <div class="modal-content">

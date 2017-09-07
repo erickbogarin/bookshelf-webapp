@@ -54,42 +54,17 @@ export class AuthorListComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.sortByService.getSortBy().subscribe(property => {
       this.query.filters.order = property;
-      console.log(property);
-      // this.runFetch();
+      this.runFetch();
     });
   }
 
   ngOnChanges(props) {
     if (props['search']) {
-      this.runFetch();
+      this.onSearchChange();
     }
   }
-  runFetch() {
-    this.loading = true;
-    this.authors = [];
 
-    this.checkSearchInput();
-
-    if (this.limit) {
-      this.query.filters.limit = this.limit;
-    }
-
-    const authors = this.authorsService.fetchAuthors(this.query);
-    const authorsCount = this.authorsService.fetchAuthorsCount(this.query);
-
-    Observable.forkJoin([authors, authorsCount]).subscribe(data => {
-      this.authors = data[0];
-      this.authorsCount = data[1].count;
-      this.loading = false;
-      this.pager = this.paginationService.getPager(
-        this.authorsCount,
-        this.pager.currentPage,
-        this.limit
-      );
-    });
-  }
-
-  checkSearchInput() {
+  onSearchChange() {
     if (this.search && this.search.length > 0) {
       this.query.filters.where = {
         or: [
@@ -110,6 +85,30 @@ export class AuthorListComponent implements OnInit, OnChanges {
     } else {
       this.query.filters.where = {};
     }
+    this.runFetch();
+  }
+
+  runFetch() {
+    this.loading = true;
+    this.authors = [];
+
+    if (this.limit) {
+      this.query.filters.limit = this.limit;
+    }
+
+    const authors = this.authorsService.fetchAuthors(this.query);
+    const authorsCount = this.authorsService.fetchAuthorsCount(this.query);
+
+    Observable.forkJoin([authors, authorsCount]).subscribe(data => {
+      this.authors = data[0];
+      this.authorsCount = data[1].count;
+      this.loading = false;
+      this.pager = this.paginationService.getPager(
+        this.authorsCount,
+        this.pager.currentPage,
+        this.limit
+      );
+    });
   }
 
   setPage(page: number) {
