@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthorListConfig } from '../shared';
+import { AppQueryParams } from '../shared';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +7,10 @@ import { AuthorListConfig } from '../shared';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   search: string = '';
-  listConfig: AuthorListConfig = new AuthorListConfig();
+  listConfig: AppQueryParams = new AppQueryParams();
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

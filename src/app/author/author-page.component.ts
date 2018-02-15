@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthorListConfig } from '../shared';
+import { AppQueryParams } from '../shared';
 
 @Component({
   selector: 'app-author-page',
@@ -7,5 +7,5 @@ import { AuthorListConfig } from '../shared';
 })
 export class AuthorPage {
   search: string = '';
-  listConfig: AuthorListConfig = new AuthorListConfig();
+  listConfig: AppQueryParams = new AppQueryParams();
 }

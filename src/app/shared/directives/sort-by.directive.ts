@@ -39,13 +39,13 @@ export class SortByDirective implements OnInit {
     ) {
       this.renderer.removeClass(this.elRef.nativeElement, this.defaultSort);
       this.renderer.addClass(this.elRef.nativeElement, this.sortAsc);
-      this.sortByService.sortBy(`${this.appSortBy} ASC`);
+      this.sortByService.sortBy(`${this.appSortBy}`);
     } else if (
       this.elRef.nativeElement.className.search(`${this.sortAsc}$`) >= 0
     ) {
       this.renderer.removeClass(this.elRef.nativeElement, this.sortAsc);
       this.renderer.addClass(this.elRef.nativeElement, this.sortDesc);
-      this.sortByService.sortBy(`${this.appSortBy} DESC`);
+      this.sortByService.sortBy(`-${this.appSortBy}`);
     } else if (
       this.elRef.nativeElement.className.search(`${this.sortDesc}$`) >= 0
     ) {

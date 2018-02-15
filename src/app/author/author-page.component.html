@@ -5,19 +5,23 @@
         Authors
       </h2>
       <a class="btn btn-outline-info" routerLink="/authors/create">
-          <i class="fa fa-plus-circle"></i> New author
-        </a>
+        <i class="fa fa-plus-circle"></i> New author
+      </a>
     </div>
   </div>
 </div>
 
 <div class="container mt-5">
   <app-alert></app-alert>
+
   <div class="input-group">
     <input class="form-control" placeholder="Search" type="text" [(ngModel)]="search">
-    <span class="input-group-addon">
+    <div class="input-group-append">
+      <span class="input-group-text">
         <i class="fa fa-search"></i>
       </span>
+    </div>
   </div>
+
   <app-author-list [limit]="8" [search]="search" [config]="listConfig"></app-author-list>
 </div>

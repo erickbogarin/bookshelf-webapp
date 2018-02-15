@@ -1,27 +1,54 @@
-<form (submit)="onSubmit($event)">
+<form class="pb-5" (submit)="onSubmit($event)">
+
+  <!-- author username -->
+  <div *ngIf="!author.id" class="form-group">
+    <label class="font-weight-bold" for="username">Username</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroupPrepend">@</span>
+      </div>
+      <input class="form-control" type="text" id="username" aria-describedby="usernameHelp" placeholder="Username" value="{{ author.user.username }}"
+        name="username" [(ngModel)]="author.user.username">
+    </div>
+  </div>
+
+  <!-- author first name -->
   <div class="form-group">
     <label class="font-weight-bold" for="firstName">First name</label>
-    <input
-      class="form-control"
-      type="text"
-      id="firstName"
-      aria-describedby="firstNameHelp"
-      placeholder="First name"
-      value="{{ author.firstName }}"
-      name="firstName"
-      [(ngModel)]="author.firstName">
+    <input class="form-control" type="text" id="firstName" aria-describedby="firstNameHelp" placeholder="First name" value="{{ author.user.first_name }}"
+      name="firstName" [(ngModel)]="author.user.first_name">
   </div>
+
+  <!-- author last name -->
   <div class="form-group">
     <label class="font-weight-bold" for="lastName">Last name</label>
-    <input
-      class="form-control"
-      type="text"
-      id="lastName"
-      placeholder="Last name"
-      value="{{ author.lastName }}"
-      name="lastName"
-      [(ngModel)]="author.lastName">
+    <input class="form-control" type="text" id="lastName" placeholder="Last name" value="{{ author.user.last_name }}" name="lastName"
+      [(ngModel)]="author.user.last_name">
   </div>
-  <ng-content></ng-content>
-  <button routerLink="/" type="submit" class="btn btn-secondary">Cancel</button>
+
+
+  <div class="row">
+    <div class="col">
+      <!-- author image -->
+      <div class="form-group">
+        <label class="font-weight-bold" for="image">Image</label>
+        <input class="form-control" type="text" id="image" placeholder="Image" value="{{ author.image }}" name="image" [(ngModel)]="author.image">
+      </div>
+    </div>
+    <!-- preview -->
+    <div class="col">
+      <img class="img-fluid img-thumbnail rounded" [src]="author.image" alt="author's image">
+    </div>
+  </div>
+
+  <!-- actions -->
+  <div class="row mt-5">
+    <div class="col">
+      <button routerLink="/" type="submit" class="btn btn-block btn btn-outline-dark">Back</button>
+    </div>
+    <div class="col">
+      <ng-content></ng-content>
+    </div>
+  </div>
+
 </form>

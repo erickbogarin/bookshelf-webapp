@@ -12,16 +12,43 @@ import {
 export class DropdownDirective {
   @HostBinding('class.show') isShow = false;
 
+  button: Element;
+  dropdownMenu: Element;
+
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
-  @HostListener('click')
-  toggleShow() {
-    this.isShow = !this.isShow;
-    const dropdownMenu = this.el.nativeElement.querySelector('.dropdown-menu');
-    if (this.isShow) {
-      this.renderer.addClass(dropdownMenu, 'show');
-    } else {
-      this.renderer.removeClass(dropdownMenu, 'show');
+  ngOnInit() {
+    this.button = this.el.nativeElement.children[0];
+    this.dropdownMenu = this.el.nativeElement.children[1];
+  }
+
+  @HostListener('click', ['$event.target'])
+  toggleShow(targetElement) {
+    if (targetElement == this.button || this.button.contains(targetElement)) {
+      if (this.isShow) {
+        this.closeDropdrownMenu();
+      } else {
+        this.openDropdownMenu();
+      }
     }
+  }
+
+  @HostListener('document:click', ['$event.target'])
+  public onPageClick(targetElement): void {
+    const clickedInside = this.el.nativeElement.contains(targetElement);
+
+    if (!clickedInside) {
+      this.closeDropdrownMenu();
+    }
+  }
+
+  private openDropdownMenu() {
+    this.isShow = true;
+    this.renderer.addClass(this.dropdownMenu, 'show');
+  }
+
+  private closeDropdrownMenu() {
+    this.isShow = false;
+    this.renderer.removeClass(this.dropdownMenu, 'show');
   }
 }

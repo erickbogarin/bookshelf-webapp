@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  api_url: 'http://libraryapp-alezio.rhcloud.com/api'
+  api_url: 'https://eb-bookshelf-api.herokuapp.com/api'
 };

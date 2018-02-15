@@ -1,6 +1,8 @@
+import { User } from 'app/shared';
 
 export class Author {
   id: number;
-  firstName: string;
-  lastName: string;
+  bio: string;
+  image: string;
+  user: User;
 }

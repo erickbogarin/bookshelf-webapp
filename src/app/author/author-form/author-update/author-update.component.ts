@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import {
-  Author,
-  AuthorsService ,
-  AlertService
-} from '../../../shared'
+import { Author, AuthorsService, AlertService } from '../../../shared';
 
 @Component({
   selector: 'app-author-update',
@@ -20,21 +16,19 @@ export class AuthorUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.route.data.subscribe(
-      (data: { author: Author }) => {
-        this.author = data.author;
-      }
-    );
+    this.route.data.subscribe((data: { author: Author }) => {
+      this.author = data.author;
+    });
   }
 
   updateAuthor(author: Author) {
-    this.authorService.save(author)
-      .subscribe(data => {
-        this.alertService.success('Author successfully updated!');
-      });
+    delete author.user.username;
+    this.authorService.save(author).subscribe(data => {
+      this.author = data;
+      this.alertService.success('Author successfully updated!');
+    });
   }
-
 }

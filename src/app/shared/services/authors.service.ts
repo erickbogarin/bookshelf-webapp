@@ -5,31 +5,33 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { ApiService } from './api.service';
-import { Author, AuthorListConfig } from '../../shared';
+import { Author, AppQueryParams, APIResponse } from '../../shared';
 
 @Injectable()
 export class AuthorsService {
   constructor(private apiService: ApiService) {}
 
-  fetchAuthors(config: AuthorListConfig): Observable<Author[]> {
-    const params: URLSearchParams = new URLSearchParams();
-    params.set('filter', JSON.stringify(config.filters));
+  fetchAuthors(config: AppQueryParams): Observable<APIResponse<Author>> {
+    let params: URLSearchParams = new URLSearchParams();
 
-    return this.apiService.get('/authors', params);
-  }
+    Object.keys(config).forEach(key => {
+      params.set(key, config[key]);
+    });
 
-  fetchAuthorsCount(config: AuthorListConfig): Observable<{ count: number }> {
-    const params: URLSearchParams = new URLSearchParams();
-    params.set('where', JSON.stringify(config.filters.where));
-
-    return this.apiService.get('/authors/count', params);
+    return this.apiService.get('/authors', params).map(response => {
+      const { results, ...filters } = response;
+      return {
+        results,
+        filters
+      };
+    });
   }
 
   save(author): Observable<Author> {
     if (author.id) {
-      return this.apiService.put(`/authors/${author.id}`, author);
+      return this.apiService.put(`/authors/${author.id}/`, author);
     } else {
-      return this.apiService.post(`/authors`, author);
+      return this.apiService.post(`/authors/`, author);
     }
   }
 

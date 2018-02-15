@@ -12,11 +12,12 @@ import 'rxjs/add/observable/forkJoin';
 import {
   Author,
   AuthorsService,
-  AuthorListConfig,
+  AppQueryParams,
   PaginationService,
   SortByService,
   ModalService,
-  AlertService
+  AlertService,
+  APIResponse
 } from '../../shared';
 
 @Component({
@@ -28,7 +29,7 @@ export class AuthorListComponent implements OnInit, OnChanges {
   @Input() search: string;
   @Input() limit: number;
   @Input()
-  set config(config: AuthorListConfig) {
+  set config(config: AppQueryParams) {
     if (config) {
       this.query = config;
       this.pager.currentPage = 1;
@@ -40,7 +41,7 @@ export class AuthorListComponent implements OnInit, OnChanges {
   authorSelected: Author;
   authorModalDeleteId = 'author-delete-modal';
   loading = false;
-  query: AuthorListConfig;
+  query: AppQueryParams = {};
   pager: any = {};
 
   constructor(
@@ -53,8 +54,8 @@ export class AuthorListComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.sortByService.getSortBy().subscribe(property => {
-      this.query.filters.order = property;
-      this.runFetch();
+      this.query.ordering = property;
+      this.loadAll();
     });
   }
 
@@ -66,49 +67,35 @@ export class AuthorListComponent implements OnInit, OnChanges {
 
   onSearchChange() {
     if (this.search && this.search.length > 0) {
-      this.query.filters.where = {
-        or: [
-          {
-            firstName: {
-              ilike: this.search
-            }
-          },
-          {
-            lastName: {
-              ilike: this.search
-            }
-          }
-        ]
-      };
-      this.query.filters.offset = 0;
+      this.query.search = this.search;
+      this.query.offset = 0;
       this.pager.currentPage = 1;
     } else {
-      this.query.filters.where = {};
+      this.query.search = '';
     }
-    this.runFetch();
+    this.loadAll();
   }
 
-  runFetch() {
+  loadAll() {
     this.loading = true;
     this.authors = [];
 
     if (this.limit) {
-      this.query.filters.limit = this.limit;
+      this.query.limit = this.limit;
     }
 
-    const authors = this.authorsService.fetchAuthors(this.query);
-    const authorsCount = this.authorsService.fetchAuthorsCount(this.query);
-
-    Observable.forkJoin([authors, authorsCount]).subscribe(data => {
-      this.authors = data[0];
-      this.authorsCount = data[1].count;
-      this.loading = false;
-      this.pager = this.paginationService.getPager(
-        this.authorsCount,
-        this.pager.currentPage,
-        this.limit
-      );
-    });
+    this.authorsService
+      .fetchAuthors(this.query)
+      .subscribe((data: APIResponse<Author>) => {
+        this.authors = data.results;
+        this.authorsCount = data.filters.count;
+        this.loading = false;
+        this.pager = this.paginationService.getPager(
+          this.authorsCount,
+          this.pager.currentPage,
+          this.limit
+        );
+      });
   }
 
   setPage(page: number) {
@@ -120,8 +107,8 @@ export class AuthorListComponent implements OnInit, OnChanges {
       page,
       this.limit
     );
-    this.query.filters.offset = this.limit * (page - 1);
-    this.runFetch();
+    this.query.offset = this.limit * (page - 1);
+    this.loadAll();
   }
 
   openModal(id: string, author: Author) {
@@ -137,7 +124,7 @@ export class AuthorListComponent implements OnInit, OnChanges {
     this.authorsService.destroy(this.authorSelected.id).subscribe(() => {
       this.alertService.success('Author successfully deleted.');
       this.modalService.close(this.authorModalDeleteId);
-      this.runFetch();
+      this.loadAll();
     });
   }
 }
