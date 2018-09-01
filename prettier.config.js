@@ -1,0 +1,7 @@
+module.exports = {
+  printWidth: 140,
+  singleQuote: true,
+  jsxBracketSameLine: false,
+  parser: 'typescript',
+  arrowParens: 'avoid'
+};
