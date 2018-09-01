@@ -12,7 +12,7 @@ export class AuthorsService {
   constructor(private apiService: ApiService) {}
 
   fetchAuthors(config: AppQueryParams): Observable<APIResponse<Author>> {
-    let params: URLSearchParams = new URLSearchParams();
+    const params: URLSearchParams = new URLSearchParams();
 
     Object.keys(config).forEach(key => {
       params.set(key, config[key]);
