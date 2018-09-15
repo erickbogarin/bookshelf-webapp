@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  SimpleChange,
-  OnChanges,
-  ViewChild
-} from '@angular/core';
+import { Component, Input, OnInit, SimpleChange, OnChanges, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 
@@ -26,8 +19,10 @@ import {
   styleUrls: ['./author-list.component.sass']
 })
 export class AuthorListComponent implements OnInit, OnChanges {
-  @Input() search: string;
-  @Input() limit: number;
+  @Input()
+  search: string;
+  @Input()
+  limit: number;
   @Input()
   set config(config: AppQueryParams) {
     if (config) {
@@ -84,29 +79,19 @@ export class AuthorListComponent implements OnInit, OnChanges {
       this.query.limit = this.limit;
     }
 
-    this.authorsService
-      .fetchAuthors(this.query)
-      .subscribe((data: APIResponse<Author>) => {
-        this.authors = data.results;
-        this.authorsCount = data.filters.count;
-        this.loading = false;
-        this.pager = this.paginationService.getPager(
-          this.authorsCount,
-          this.pager.currentPage,
-          this.limit
-        );
-      });
+    this.authorsService.query(this.query).subscribe((data: APIResponse<Author>) => {
+      this.authors = data.results;
+      this.authorsCount = data.filters.count;
+      this.loading = false;
+      this.pager = this.paginationService.getPager(this.authorsCount, this.pager.currentPage, this.limit);
+    });
   }
 
   setPage(page: number) {
     if (page < 1 || page > this.pager.totalPages) {
       return;
     }
-    this.pager = this.paginationService.getPager(
-      this.authorsCount,
-      page,
-      this.limit
-    );
+    this.pager = this.paginationService.getPager(this.authorsCount, page, this.limit);
     this.query.offset = this.limit * (page - 1);
     this.loadAll();
   }
@@ -121,7 +106,7 @@ export class AuthorListComponent implements OnInit, OnChanges {
   }
 
   deleteAuthor(id: string) {
-    this.authorsService.destroy(this.authorSelected.id).subscribe(() => {
+    this.authorsService.delete(this.authorSelected.id).subscribe(() => {
       this.alertService.success('Author successfully deleted.');
       this.modalService.close(this.authorModalDeleteId);
       this.loadAll();

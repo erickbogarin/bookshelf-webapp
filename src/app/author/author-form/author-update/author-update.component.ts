@@ -26,9 +26,18 @@ export class AuthorUpdateComponent implements OnInit {
 
   updateAuthor(author: Author) {
     delete author.user.username;
-    this.authorService.save(author).subscribe(data => {
-      this.author = data;
+    this.authorService.save(author).subscribe(data => this.onUpdateSuccess(data), err => this.onUpdateError(err));
+  }
+
+  onUpdateSuccess(author: Author) {
+    this.author = author;
+    this.router.navigate(['authors']).then(() => {
       this.alertService.success('Author successfully updated!');
     });
+  }
+
+  onUpdateError(err) {
+    console.error(err);
+    this.alertService.error('Failed to update author!');
   }
 }

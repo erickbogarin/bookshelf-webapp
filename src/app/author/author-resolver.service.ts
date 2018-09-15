@@ -15,7 +15,7 @@ export class AuthorResolver implements Resolve<Author> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any> {
-    return this.authorService.get(route.params['id'])
+    return this.authorService.find(route.params['id'])
       .catch((err) => this.router.navigateByUrl('/'));
   }
 }

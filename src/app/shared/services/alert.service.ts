@@ -4,10 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { Alert, AlertType } from '../models/alert.model';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AlertService {
-  private subject = new Subject<Alert>();
+  private subject = new BehaviorSubject<Alert>(null);
   private keepAfterRouteChange = false;
 
   constructor(private router: Router) {
@@ -25,7 +26,7 @@ export class AlertService {
     });
   }
 
-  getAlert(): Observable<any> {
+  getAlert(): Observable<Alert> {
     return this.subject.asObservable();
   }
 
@@ -51,7 +52,6 @@ export class AlertService {
   }
 
   clear() {
-    this.subject.next();
+    this.subject.next(null);
   }
-
 }

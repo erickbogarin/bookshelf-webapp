@@ -18,7 +18,8 @@ export class AuthorFormComponent implements OnInit {
       last_name: null
     }
   };
-  @Output('onSubmited') onSubmited = new EventEmitter<Author>();
+  @Output('onSubmited')
+  onSubmited = new EventEmitter<Author>();
 
   constructor() {}
 

@@ -7,23 +7,30 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="inputGroupPrepend">@</span>
       </div>
-      <input class="form-control" type="text" id="username" aria-describedby="usernameHelp" placeholder="Username" value="{{ author.user.username }}"
-        name="username" [(ngModel)]="author.user.username">
+      <input class="form-control" type="text" id="username"
+        aria-describedby="usernameHelp" placeholder="Username"
+        value="{{ author.user.username }}" name="username"
+        [(ngModel)]="author.user.username">
     </div>
   </div>
 
   <!-- author first name -->
   <div class="form-group">
-    <label class="font-weight-bold" for="firstName">First name</label>
-    <input class="form-control" type="text" id="firstName" aria-describedby="firstNameHelp" placeholder="First name" value="{{ author.user.first_name }}"
-      name="firstName" [(ngModel)]="author.user.first_name">
+    <label class="font-weight-bold" for="firstName">First
+      name</label>
+    <input class="form-control" type="text" id="firstName"
+      aria-describedby="firstNameHelp" placeholder="First name"
+      value="{{ author.user.first_name }}" name="firstName"
+      [(ngModel)]="author.user.first_name">
   </div>
 
   <!-- author last name -->
   <div class="form-group">
-    <label class="font-weight-bold" for="lastName">Last name</label>
-    <input class="form-control" type="text" id="lastName" placeholder="Last name" value="{{ author.user.last_name }}" name="lastName"
-      [(ngModel)]="author.user.last_name">
+    <label class="font-weight-bold" for="lastName">Last
+      name</label>
+    <input class="form-control" type="text" id="lastName"
+      placeholder="Last name" value="{{ author.user.last_name }}"
+      name="lastName" [(ngModel)]="author.user.last_name">
   </div>
 
 
@@ -32,19 +39,22 @@
       <!-- author image -->
       <div class="form-group">
         <label class="font-weight-bold" for="image">Image</label>
-        <input class="form-control" type="text" id="image" placeholder="Image" value="{{ author.image }}" name="image" [(ngModel)]="author.image">
+        <input class="form-control" type="text" id="image"
+          placeholder="Image" value="{{ author.image }}"
+          name="image" [(ngModel)]="author.image">
       </div>
     </div>
     <!-- preview -->
     <div class="col">
-      <img class="img-fluid img-thumbnail rounded" [src]="author.image" alt="author's image">
+      <img class="img-fluid img-thumbnail rounded" [src]="author.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'"
+        alt="author's image">
     </div>
   </div>
 
   <!-- actions -->
   <div class="row mt-5">
     <div class="col">
-      <button routerLink="/" type="submit" class="btn btn-block btn btn-outline-dark">Back</button>
+      <button routerLink="/" type="button" class="btn btn-block btn btn-outline-dark">Back</button>
     </div>
     <div class="col">
       <ng-content></ng-content>

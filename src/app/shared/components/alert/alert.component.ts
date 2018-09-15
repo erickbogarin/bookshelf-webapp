@@ -1,26 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Alert, AlertType } from '../../models/index';
 import { AlertService } from '../../services/index';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss']
 })
-export class AlertComponent implements OnInit {
+export class AlertComponent implements OnInit, OnDestroy {
+  private readonly ALERT_TIME_MS = 5000;
+
+  alertSub: Subscription;
   alerts: Alert[] = [];
 
-  constructor(private alertService: AlertService) { }
+  constructor(private alertService: AlertService) {}
 
   ngOnInit() {
-    this.alertService.getAlert().subscribe((alert: Alert) => {
+    this.alertSub = this.alertService.getAlert().subscribe((alert: Alert) => {
       if (!alert) {
         this.alerts = [];
         return;
       }
 
       this.alerts.push(alert);
+      setTimeout(() => this.removeAlert(alert), this.ALERT_TIME_MS);
     });
   }
 
@@ -33,7 +38,7 @@ export class AlertComponent implements OnInit {
       return;
     }
 
-    switch(alert.type) {
+    switch (alert.type) {
       case AlertType.Success:
         return 'alert alert-success';
       case AlertType.Error:
@@ -45,4 +50,7 @@ export class AlertComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    this.alertSub.unsubscribe();
+  }
 }
