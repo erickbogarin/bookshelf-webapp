@@ -19,7 +19,7 @@ export class AuthorsService {
       params.set(key, config[key]);
     });
 
-    return this.apiService.get(`${this.RESOURCE_URL}`, params).map(response => {
+    return this.apiService.get(`${this.RESOURCE_URL}/`, params).map(response => {
       const { results, ...filters } = response;
       return {
         results,
@@ -29,7 +29,7 @@ export class AuthorsService {
   }
 
   find(id): Observable<Author> {
-    return this.apiService.get(`${this.RESOURCE_URL}/${id}`);
+    return this.apiService.get(`${this.RESOURCE_URL}/${id}/`);
   }
 
   save(author): Observable<Author> {
