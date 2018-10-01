@@ -15,32 +15,16 @@ import {
   AlertService,
   SortByService,
   ModalService,
-  HeaderComponent
+  HeaderComponent,
+  FooterComponent
 } from './shared';
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([]);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-  ],
-  imports: [
-    BrowserModule,
-    SharedModule,
-    ModalModule.forRoot(),
-    rootRouting,
-    AuthorModule,
-    HomeModule
-  ],
-  providers: [
-    ApiService,
-    AuthorsService,
-    PaginationService,
-    AlertService,
-    SortByService,
-    ModalService
-  ],
+  declarations: [AppComponent, HeaderComponent, FooterComponent],
+  imports: [BrowserModule, SharedModule, ModalModule.forRoot(), rootRouting, AuthorModule, HomeModule],
+  providers: [ApiService, AuthorsService, PaginationService, AlertService, SortByService, ModalService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
