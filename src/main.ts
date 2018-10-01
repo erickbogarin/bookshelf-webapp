@@ -6,8 +6,9 @@ import { environment } from './environments/environment';
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';
+import fab from '@fortawesome/fontawesome-free-brands';
 
-fontawesome.library.add(solid);
+fontawesome.library.add(solid, fab);
 
 if (environment.production) {
   enableProdMode();
