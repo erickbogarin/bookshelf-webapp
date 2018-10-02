@@ -1,25 +1,18 @@
-import { ModuleWithProviders, NgModule, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
+import { SharedModule } from '../shared';
 import { HomeComponent } from './home.component';
-import { SharedModule, DropdownDirective } from '../shared';
-import { AuthorModule } from '../author/author.module';
 
-const homeRouting: ModuleWithProviders = RouterModule.forChild([
+const routes: Routes = [
   {
     path: '',
     component: HomeComponent
   }
-]);
+];
 
 @NgModule({
-  imports: [
-    homeRouting,
-    SharedModule,
-    AuthorModule
-  ],
-  declarations: [
-    HomeComponent
-  ]
+  imports: [RouterModule.forChild(routes), SharedModule],
+  declarations: [HomeComponent]
 })
 export class HomeModule {}

@@ -1,29 +1,26 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+
 import { ModalModule } from 'ngx-bootstrap/modal';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthorModule } from './author/author.module';
 import { HomeModule } from './home/home.module';
-
 import {
+  AlertService,
   ApiService,
   AuthorsService,
-  SharedModule,
-  PaginationService,
-  AlertService,
-  SortByService,
-  ModalService,
+  FooterComponent,
   HeaderComponent,
-  FooterComponent
+  ModalService,
+  PaginationService,
+  SharedModule,
+  SortByService
 } from './shared';
-
-const rootRouting: ModuleWithProviders = RouterModule.forRoot([]);
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
-  imports: [BrowserModule, SharedModule, ModalModule.forRoot(), rootRouting, AuthorModule, HomeModule],
+  imports: [BrowserModule, SharedModule, ModalModule.forRoot(), AppRoutingModule, HomeModule],
   providers: [ApiService, AuthorsService, PaginationService, AlertService, SortByService, ModalService],
   bootstrap: [AppComponent]
 })

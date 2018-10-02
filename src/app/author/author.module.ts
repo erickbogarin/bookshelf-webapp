@@ -1,38 +1,17 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared';
-import { AuthorResolver } from './author-resolver.service';
-import { AuthorListComponent } from './author-list/author-list.component';
-import { AuthorFormComponent } from './author-form/author-form.component';
 import { AuthorCreateComponent } from './author-form/author-create/author-create.component';
+import { AuthorFormComponent } from './author-form/author-form.component';
 import { AuthorUpdateComponent } from './author-form/author-update/author-update.component';
+import { AuthorListComponent } from './author-list/author-list.component';
 import { AuthorPage } from './author-page.component';
-
-const authorRouting: ModuleWithProviders = RouterModule.forChild([
-  {
-    path: 'authors',
-    children: [
-      { path: '', component: AuthorPage },
-      { path: 'create', component: AuthorCreateComponent },
-      {
-        path: ':id/update',
-        component: AuthorUpdateComponent,
-        resolve: { author: AuthorResolver }
-      }
-    ]
-  }
-]);
+import { AuthorResolver } from './author-resolver.service';
+import { AuthorRoutingModule } from './author-routing.module';
 
 @NgModule({
-  imports: [authorRouting, SharedModule],
-  declarations: [
-    AuthorPage,
-    AuthorListComponent,
-    AuthorFormComponent,
-    AuthorCreateComponent,
-    AuthorUpdateComponent
-  ],
+  imports: [AuthorRoutingModule, SharedModule],
+  declarations: [AuthorPage, AuthorListComponent, AuthorFormComponent, AuthorCreateComponent, AuthorUpdateComponent],
   exports: [AuthorListComponent, AuthorPage],
   providers: [AuthorResolver]
 })
