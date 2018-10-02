@@ -1,0 +1,82 @@
+
+/* -----------------
+  Author stylesheet
+  ------------------*/
+
+/** author-action */
+
+.author-action {
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+  transition: .2s;
+
+  &:hover {
+    cursor: pointer
+  }
+}
+
+
+.author-item:hover .author-action {
+  visibility: visible;
+  opacity: 1;
+}
+
+/** author-menu-action */
+
+.author-menu-action {
+  position: absolute;
+  top: 100%;
+  left: -75%;
+}
+
+.skeleton-screen {
+  .name {
+    margin: 0;
+    width: 100%;
+  }
+  .bio {
+    margin: 0;
+    width: 60%;
+  }
+
+  .img, .name, .bio {
+    background-color: lightgrey;
+    opacity: 0.5;
+    height: .75em;
+    position: relative;
+    margin-top: 10px;
+  }
+
+  .img {
+    display: block;
+    border-radius: 5px;
+    width: 100%;
+    height: 150px;
+  }
+
+  .name, .bio {
+    animation: animatedBar 2s linear infinite;
+    background: linear-gradient(to right, #dddddd , #EEEEEE);
+  }
+
+  &:after {
+    position: absolute;
+    display: block;
+    content: '';
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: white;
+  }
+}
+
+@keyframes animatedBar {
+  0%{
+    background-position: -406px 0;
+  }
+  100%{
+    background-position: 0 0;
+  }
+}
+
