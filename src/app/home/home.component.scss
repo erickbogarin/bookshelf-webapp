@@ -72,19 +72,16 @@
     }
   }
 
-
-  .icon {
-    margin: 0 auto;
-    &.fa-book {
-      color: #eac556;
-    }
-    &.fa-user-tie {
-      color: #527b82;
-    }
-    &.fa-cubes {
-      color: #903a9e;
-    }
+  .fa-book {
+    color: #eac556;
   }
+  .fa-user-tie {
+    color: #527b82;
+  }
+  .fa-cubes {
+    color: #903a9e;
+  }
+
   .title {
     margin: 0;
     margin-top: 8px;

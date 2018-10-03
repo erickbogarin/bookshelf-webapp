@@ -11,19 +11,20 @@
 
           <div class="dropdown" appDropdown>
             <button class="btn btn-link">
-              <i class="fa fa-ellipsis-v  fa-pull-left fa-border text-muted"></i>
+              <fa-icon icon="ellipsis-v" pull="left"
+                [border]="true" class="text-muted"></fa-icon>
             </button>
             <div class="author-menu-action dropdown-menu app-dropdown pt-3 pb-2">
               <!-- update author -->
               <a class="dropdown-item mb-2" [routerLink]="['/authors', author.id, 'update']">
-                <i class="text-primary fa fa-edit"></i>
+                <fa-icon icon="edit" class="text-primary"></fa-icon>
                 Update
                 Author
               </a>
               <!-- delete author -->
               <button class="btn btn-link dropdown-item"
                 (click)="openModal(authorModalDeleteId, author)">
-                <i class="text-danger fa fa-trash"></i>
+                <fa-icon icon="trash" class="text-danger"></fa-icon>
                 Delete
                 Author
               </button>
