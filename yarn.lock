@@ -4753,10 +4753,10 @@ negotiator@0.6.1:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
   integrity sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk=
 
-ngx-bootstrap@^1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-1.7.1.tgz#f48e5d81c40e8e1f25abd3e7b38808ee9ec8e903"
-  integrity sha512-d7Rquh+qg0/S3an1QHfWnYNIPeo5Ek+bXCAZHSNaKXjCl0w0ofEK/kGagoE8CdcJqssiwTuboKWoMx5mWGBkBQ==
+ng-bootstrap@^1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/ng-bootstrap/-/ng-bootstrap-1.6.3.tgz#d41fd42154c0593422cb83c473a3828aa7525bf5"
+  integrity sha1-1B/UIVTAWTQiy4PEc6OCiqdSW/U=
   dependencies:
     moment "2.18.1"
 
