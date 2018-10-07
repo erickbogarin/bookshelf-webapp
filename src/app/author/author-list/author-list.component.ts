@@ -12,6 +12,7 @@ import {
   AlertService,
   APIResponse
 } from '../../shared';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-author-list',
@@ -44,7 +45,8 @@ export class AuthorListComponent implements OnInit, OnChanges {
     private paginationService: PaginationService,
     private sortByService: SortByService,
     private modalService: ModalService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -96,11 +98,6 @@ export class AuthorListComponent implements OnInit, OnChanges {
     this.loadAll();
   }
 
-  openModal(id: string, author: Author) {
-    this.modalService.open(id);
-    this.authorSelected = author;
-  }
-
   closeModal(id: string) {
     this.modalService.close(id);
   }
@@ -111,5 +108,14 @@ export class AuthorListComponent implements OnInit, OnChanges {
       this.modalService.close(this.authorModalDeleteId);
       this.loadAll();
     });
+  }
+
+  onUpdate(author: Author) {
+    this.router.navigate(['/authors', author.id, 'update']);
+  }
+
+  onDelete(author: Author) {
+    this.modalService.open(this.authorModalDeleteId);
+    this.authorSelected = author;
   }
 }

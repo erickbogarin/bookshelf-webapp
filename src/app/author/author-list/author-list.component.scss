@@ -3,33 +3,6 @@
   Author stylesheet
   ------------------*/
 
-/** author-action */
-
-.author-action {
-  position: relative;
-  visibility: hidden;
-  opacity: 0;
-  transition: .2s;
-
-  &:hover {
-    cursor: pointer
-  }
-}
-
-
-.author-item:hover .author-action {
-  visibility: visible;
-  opacity: 1;
-}
-
-/** author-menu-action */
-
-.author-menu-action {
-  position: absolute;
-  top: 100%;
-  left: -75%;
-}
-
 .skeleton-screen {
   .name {
     margin: 0;

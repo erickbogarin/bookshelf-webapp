@@ -1,0 +1,22 @@
+
+/** author-action */
+
+.author-action {
+  &:hover {
+    cursor: pointer
+  }
+}
+
+
+.author-item:hover .author-action {
+  visibility: visible;
+  opacity: 1;
+}
+
+/** author-menu-action */
+
+.author-menu-action {
+  position: absolute;
+  top: 100%;
+  left: -75%;
+}
